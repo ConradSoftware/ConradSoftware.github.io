@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Conrad Kubiak, Software Engineering Co-op student at the University of Guelph. Projects, skills and contact.">
+<title>Conrad Kubiak</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one narrow column; hero pairs the name with a live AI-Pong court, projects as a 2-col grid that stacks on phones */
+:root {
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --fg: #16191f;
+  --muted: #5b616d;
+  --line: #dde0e6;
+  --accent: #c20430;      /* Guelph red */
+  --gold: #e0a800;
+  --court: #16191f;
+  --court-fg: #f4f5f7;
+  --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #101216; --surface: #181b21; --fg: #e9ebef; --muted: #9aa1ad; --line: #2a2f38;
+    --accent: #ff5a72; --gold: #ffcf4a; --court: #07080a; --court-fg: #e9ebef; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #101216; --surface: #181b21; --fg: #e9ebef; --muted: #9aa1ad; --line: #2a2f38;
+  --accent: #ff5a72; --gold: #ffcf4a; --court: #07080a; --court-fg: #e9ebef; color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--fg); font-family: var(--body); font-size: 16px; line-height: 1.6;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 64px;
+}
+.wrap { max-width: 920px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+/* Hero */
+.hero { display: grid; grid-template-columns: 1.15fr 1fr; gap: 32px; align-items: center; }
+.hero > * { min-width: 0; }
+.eyebrow { font-family: var(--mono); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(44px, 8vw, 72px); line-height: .95; letter-spacing: -.02em; margin: 0 0 18px; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 46ch; margin: 0 0 22px; font-size: 17px; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.btn { display: inline-flex; align-items: center; gap: 8px; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); text-decoration: none; font-size: 14px; font-weight: 500; transition: border-color .15s, color .15s; }
+.btn:hover { border-color: var(--accent); color: var(--accent); }
+.btn.primary { background: var(--fg); color: var(--bg); border-color: var(--fg); }
+.btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.court { background: var(--court); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+.court canvas { width: 100%; max-width: 100%; aspect-ratio: 4 / 3; display: block; }
+.court-meta { display: flex; justify-content: space-between; gap: 12px; font-family: var(--mono); font-size: 12px; color: var(--court-fg); opacity: .75; font-variant-numeric: tabular-nums; }
+
+/* Sections */
+section h2 { font-family: var(--display); font-weight: 700; font-size: 28px; letter-spacing: -.01em; margin: 0 0 20px; display: flex; align-items: baseline; gap: 12px; }
+section h2 small { font-family: var(--mono); font-weight: 400; font-size: 13px; color: var(--muted); letter-spacing: 0; }
+
+.projects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.project { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+.project.feature { grid-column: 1 / -1; border-color: var(--accent); }
+.project-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+.project h3 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 0; }
+.date { font-family: var(--mono); font-size: 12px; color: var(--muted); white-space: nowrap; }
+.project p { margin: 0; color: var(--muted); }
+.project ul { margin: 0; padding-left: 18px; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 4px; }
+.tag { font-family: var(--mono); font-size: 12px; padding: 2px 8px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); }
+.project-link { font-weight: 600; font-size: 14px; color: var(--accent); text-decoration: none; }
+.project-link:hover { text-decoration: underline; }
+.feature-badge { font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
+
+.two { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+.two > * { min-width: 0; }
+.rows { display: flex; flex-direction: column; gap: 14px; margin: 0; padding: 0; list-style: none; }
+.rows li { display: flex; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+.rows strong { display: block; }
+.rows span { color: var(--muted); font-size: 14px; }
+.skills { display: flex; flex-wrap: wrap; gap: 8px; }
+
+.contact { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 14px; }
+.contact code { font-family: var(--mono); font-size: 15px; user-select: all; }
+.copy { font: inherit; font-size: 14px; cursor: pointer; }
+footer { color: var(--muted); font-size: 13px; font-family: var(--mono); }
+
+@media (max-width: 720px) {
+  body { padding-block: 32px 48px; }
+  .hero, .two { grid-template-columns: 1fr; }
+  .projects { grid-template-columns: 1fr; }
+}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <header class="hero">
+    <div>
+      <p class="eyebrow">Software Engineering Co-op · University of Guelph</p>
+      <h1>Conrad Kubiak</h1>
+      <p class="lede">First-year Software Engineering student from Burlington, Ontario. I build practical software: full-stack apps, data tools and projects that use AI. Looking for Summer/Fall 2027 co-op roles.</p>
+      <nav class="links" aria-label="Profiles">
+        <a class="btn primary" href="https://www.linkedin.com/in/conradkubiak" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="btn" href="https://github.com/ConradSoftware" target="_blank" rel="noopener">GitHub</a>
+        <a class="btn" href="https://openprocessing.org/@u583969" target="_blank" rel="noopener">OpenProcessing</a>
+      </nav>
+    </div>
+    <figure class="court" style="margin:0">
+      <canvas id="pong" width="480" height="360" aria-label="Animation of two AI paddles playing Pong"></canvas>
+      <figcaption class="court-meta"><span>neuroevolution pong · 3-4-2 net</span><span id="gen">gen 1</span></figcaption>
+    </figure>
+  </header>
+
+  <section aria-labelledby="proj-h">
+    <h2 id="proj-h">Projects <small>6 builds, newest first</small></h2>
+    <div class="projects">
+      <article class="project feature">
+        <div class="project-top"><h3>Portfolio Dashboard</h3><span class="date">Oct 2026 – now</span></div>
+        <span class="feature-badge">Featured</span>
+        <p>A full-stack investment dashboard that imports brokerage CSV exports and tracks holdings, live CAD prices, news and earnings.</p>
+        <ul>
+          <li>Time-weighted returns benchmarked against the S&amp;P 500 and TSX, plus realized gains, dividends and fees</li>
+          <li>Yahoo Finance and Finnhub APIs, with automatic price refreshes and auto-import of new exports</li>
+          <li>Optional AI analyst on the Claude API writes a daily brief and makes short-term calls that are scored automatically</li>
+          <li>Runs locally for privacy; core logic tested with pytest</li>
+        </ul>
+        <div class="tags"><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">JavaScript</span><span class="tag">pytest</span><span class="tag">Claude API</span></div>
+        <a class="project-link" href="https://github.com/LackOfWifi/portfolio-app" target="_blank" rel="noopener">View code →</a>
+      </article>
+
+      <article class="project">
+        <div class="project-top"><h3>Neuroevolution Pong AI</h3><span class="date">Jun 2026</span></div>
+        <p>Pong paddles that learn to play. A neural network written from scratch, trained by a genetic algorithm across populations of 25 agents.</p>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">p5.js</span><span class="tag">Genetic algorithms</span></div>
+        <a class="project-link" href="https://openprocessing.org/sketch/2958837" target="_blank" rel="noopener">Watch it train →</a>
+      </article>
+
+      <article class="project">
+        <div class="project-top"><h3>Stock Data Application</h3><span class="date">May 2026</span></div>
+        <p>Interactive stock viewer on the Alpha Vantage API, with hover charts, moving averages, a sortable table and a saved watchlist.</p>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">p5.js</span><span class="tag">REST API</span></div>
+        <a class="project-link" href="https://openprocessing.org/sketch/2931930" target="_blank" rel="noopener">Try it →</a>
+      </article>
+
+      <article class="project">
+        <div class="project-top"><h3>Ski Runner Game</h3><span class="date">May 2026</span></div>
+        <p>Endless ski game with levels, scoring, jump physics, particle trails and object recycling for an endless course.</p>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">p5.js</span></div>
+        <a class="project-link" href="https://openprocessing.org/sketch/2958556" target="_blank" rel="noopener">Play it →</a>
+      </article>
+
+      <article class="project">
+        <div class="project-top"><h3>World Population Map</h3><span class="date">Apr 2026</span></div>
+        <p>Interactive world map that loads population data from CSV, colour-codes countries and shows per-country popups with zoom.</p>
+        <div class="tags"><span class="tag">JavaScript</span><span class="tag">p5.js</span><span class="tag">CSV</span></div>
+        <a class="project-link" href="https://openprocessing.org/sketch/2922224" target="_blank" rel="noopener">Explore it →</a>
+      </article>
+
+      <article class="project feature" style="border-color: var(--line)">
+        <div class="project-top"><h3>Two-Player Platformer Tag</h3><span class="date">Jul 2025</span></div>
+        <p>Local two-player tag game with gravity, platform collisions, a round timer, tag cooldowns and character animations.</p>
+        <div class="tags"><span class="tag">Python</span><span class="tag">CMU Graphics</span></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="two">
+    <section aria-labelledby="edu-h">
+      <h2 id="edu-h">Education</h2>
+      <ul class="rows">
+        <li><div><strong>University of Guelph</strong><span>Bachelor of Computing (Honours Co-op), Software Engineering</span></div><span class="date">2026 – now</span></li>
+        <li><div><strong>Assumption Catholic Secondary School</strong><span>Ontario Secondary School Diploma</span></div><span class="date">2022 – 2026</span></li>
+        <li><div><strong>Crusading for Cans</strong><span>Volunteer, 40+ hours of food-drive canvassing</span></div><span class="date">2022 – 2026</span></li>
+      </ul>
+    </section>
+    <section aria-labelledby="skills-h">
+      <h2 id="skills-h">Skills</h2>
+      <div class="skills">
+        <span class="tag">Python</span><span class="tag">JavaScript</span><span class="tag">C</span><span class="tag">HTML/CSS</span>
+        <span class="tag">FastAPI</span><span class="tag">p5.js</span><span class="tag">pytest</span><span class="tag">Git</span>
+        <span class="tag">REST APIs</span><span class="tag">Claude API</span><span class="tag">Neural networks</span><span class="tag">Data visualization</span>
+      </div>
+      <p style="color:var(--muted); margin:16px 0 0; font-size:14px">Languages: English (native), Polish (professional working). Standard First Aid &amp; CPR.</p>
+    </section>
+  </div>
+
+  <section class="contact" aria-label="Contact">
+    <div><strong style="font-family:var(--display); font-size:20px">Get in touch</strong><br><code id="email">KubiakConrad@gmail.com</code></div>
+    <button class="btn copy" id="copyBtn" type="button">Copy email</button>
+  </section>
+
+  <footer>© 2026 Conrad Kubiak · Burlington, ON</footer>
+</div>
+
+<script>
+// Copy email
+document.getElementById('copyBtn').addEventListener('click', async (e) => {
+  const btn = e.currentTarget, txt = document.getElementById('email').textContent;
+  try { await navigator.clipboard.writeText(txt); btn.textContent = 'Copied'; }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('email')); const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected — press Ctrl+C'; }
+  setTimeout(() => btn.textContent = 'Copy email', 2000);
+});
+
+// AI Pong court: paddles track the ball imperfectly; "generation" improves accuracy over time
+(() => {
+  const c = document.getElementById('pong'), ctx = c.getContext('2d'), genEl = document.getElementById('gen');
+  const W = c.width, H = c.height, PH = 60, PW = 8;
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  let ball, left = H/2, right = H/2, gen = 1, skill = 0.35, rally = 0;
+  const reset = dir => { ball = { x: W/2, y: H/2, vx: 4.2*dir, vy: (Math.random()*2-1)*3 }; rally = 0; };
+  reset(1);
+  const think = (p, isLeft) => {
+    const coming = isLeft ? ball.vx < 0 : ball.vx > 0;
+    const target = coming ? ball.y + (Math.random()-.5)*(1-skill)*120 : H/2;
+    return p + Math.max(-5, Math.min(5, (target - p) * (0.06 + skill*0.12)));
+  };
+  function step() {
+    left = think(left, true); right = think(right, false);
+    ball.x += ball.vx; ball.y += ball.vy;
+    if (ball.y < 6 || ball.y > H-6) ball.vy *= -1;
+    const hit = (py, px) => Math.abs(ball.y - py) < PH/2 + 6 && Math.abs(ball.x - px) < PW + 4;
+    if (ball.vx < 0 && hit(left, 24)) { ball.vx = Math.min(9, -ball.vx*1.04); ball.vy += (ball.y-left)*0.08; rally++; }
+    if (ball.vx > 0 && hit(right, W-24)) { ball.vx = Math.max(-9, -ball.vx*1.04); ball.vy += (ball.y-right)*0.08; rally++; }
+    if (ball.x < -10 || ball.x > W+10) { gen++; skill = Math.min(0.92, skill + 0.04); genEl.textContent = 'gen ' + gen; reset(ball.x < 0 ? 1 : -1); }
+  }
+  function draw() {
+    const fg = css('--court-fg'), ac = css('--accent'), bg = css('--court');
+    ctx.fillStyle = bg; ctx.fillRect(0,0,W,H);
+    ctx.globalAlpha = .25; ctx.fillStyle = fg;
+    for (let y = 8; y < H; y += 22) ctx.fillRect(W/2-1, y, 2, 12);
+    ctx.globalAlpha = 1;
+    ctx.fillRect(20, left-PH/2, PW, PH);
+    ctx.fillRect(W-28, right-PH/2, PW, PH);
+    ctx.fillStyle = ac; ctx.beginPath(); ctx.arc(ball.x, ball.y, 6, 0, Math.PI*2); ctx.fill();
+    ctx.fillStyle = fg; ctx.globalAlpha = .6; ctx.font = '500 14px "IBM Plex Mono", monospace';
+    ctx.fillText('rally ' + rally, 16, 22); ctx.globalAlpha = 1;
+  }
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (still) { draw(); return; }
+  (function loop(){ step(); draw(); requestAnimationFrame(loop); })();
+})();
+</script>
+
+</body>
+</html>
